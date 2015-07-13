@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="{% static 'Rebbit/signintwo.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'Rebbit/homepage.css' %}">
+    <title>subrebbit</title>
+</head>
+{%  block content %}
+<body class = "news">
+  <header>
+    <div class="nav">
+      <ul>
+        <li class="home"><a href="/index">Home</a></li>
+        <li class="logout"><a href="#">Log Out</a></li>
+        <li class="aboutus"><a href="#">About Us</a></li>
+      </ul>
+    </div>
+  </header>
+<form action="/auth/" method="POST">{% csrf_token %}
+  <div class="group">
+    <input type="text" name="username" id="username"><span class="highlight"></span><span class="bar"></span>
+    <label>Name</label>
+  </div>
+  <div class="group">
+    <input type="text" name="password" id="password"><span class="highlight"></span><span class="bar"></span>
+    <label>Password</label>
+  </div>
+  <button type="submit" onclick="review.save(); return false;" class="button buttonBlue">Sign In
+    <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+  </button>
+      <button onclick="window.location.href='/signup'" type="button" class="button buttonBlue">Register
+    <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+  </button>
+</form>
+{% endblock %}
+</body>
+</html>

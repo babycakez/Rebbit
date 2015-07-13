@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    {% load staticfiles %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'Rebbit/homepage.css' %}" />
+    <title>Rebbit</title>
+</head>
+
+<body class = "news">
+  <header>
+    <div class="nav">
+      <ul>
+        <li class="signin"><a href="/signin">Sign In</a></li>
+        {% if request.session.user_username %}
+        <li class="logout"><a href="/logout">Log Out</a></li>
+        {% endif %}
+        <li class="logout"><a href="/account">Account</a></li>
+        <li class="aboutus"><a href="#">About Us</a></li>
+      </ul>
+    </div>
+  </header>
+<center><h1>Rebbit</h1><br><h3>Welcome {{ request.session.user_fname }}</h3></center>
+  <table><tr>
+      <td>
+  <div class = "container">
+
+    {% for post in Rebbit reversed%}
+        <h2>{{ post.title }}</h2>
+        <p>
+            {{ post.rpost }}<br>
+            <small><b>{{ post.creator }} on {{ post.created }} {{ post.subreddit }} id: {{ post.id }}</b></small>
+        </p>
+{% endfor %}
+</div>
+</td>
+  <td>
+      <center><h1>Subrebbit List</h1></center>
+  </td></tr></table>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    {% load staticfiles %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'Rebbit/homepage.css' %}" />
+    <title>subrebbit</title>
+</head>
+
+<body class = "news">
+  <header>
+    <div class="nav">
+      <ul>
+        <li class="index"><a href="/index">Home</a></li>
+        {% if not request.session.user_username  %}
+        <li class="signin"><a href="/signin">Log In</a></li>
+        {% endif %}
+        <li class="logout"><a href="/logout">Log Out</a></li>
+        <li class="aboutus"><a href="#">About Us</a></li>
+      </ul>
+    </div>
+  </header>
+<center><h1>Account Home</h1></center>
+  {% if request.session.user_username %}
+  <center><div class = "a">
+    <label>Name:</label>
+</div>
+<div class = "a">
+    <p>{{ request.session.user_fname  }} {{ request.session.user_lname  }}</p>
+</div><br>
+      <div class = "a">
+        <label>Email:</label>
+</div>
+<div class ="a">
+    <p>{{ request.session.user_email  }}</p>
+</div><br>
+<div class = "a">
+    <label>Username:</label>
+</div>
+<div class = "a">
+    <p>{{ request.session.user_username }}</p>
+</div><br>
+{% else %}
+      <center><h2>You are not logged in</h2>
+      <button onclick="window.location.href='/signin'" type="button" class="button buttonBlue">Sign In
+      <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+  </button></center>
+{% endif %}
+  </center>
+</body>
+</html>
