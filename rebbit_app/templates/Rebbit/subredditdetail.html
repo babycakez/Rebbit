@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+    {% load staticfiles %}
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="{% static 'Rebbit/signintwo.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'Rebbit/homepage.css' %}">
+    <title>subrebbit</title>
+</head>
+<body class = "news">
+  <header>
+    <div class="nav">
+      <ul class="ul2">
+        {% if request.session.user_username %}
+        <li class="logout"><a href="/index">Home</a></li>
+        <li class="logout"><a href="/logout">Log Out</a></li>
+        <li class="createpost"><a href="/createpost">Post</a></li>
+        <li class="createpost"><a href="/createsub">Create Topic</a></li>
+        <li class="logout"><a href="/account">Account</a></li>
+        <li class="aboutus"><a href="/about">About Us</a></li>
+        {% else %}
+        <li class="logout"><a href="/index">Home</a></li>
+        <li class="signin"><a href="/signin">Sign In</a></li>
+        <li class="createpost"><a href="/createpost">Post</a></li>
+        <li class="aboutus"><a href="/about">About Us</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </header>
+  <div class="postview">
+  <div class="group">
+        <center><h1><u>{{ Post_list.title }}</u></h1><span class="highlight"></span><span class="bar"></span>
+  </center>
+  </div>
+  <div class="group">
+  <p>{{ Post_list.rpost }}</p><br>
+  <p>Links:</p>
+  {% if invalid %}
+    <h4>No Links Provided</h4>
+  {% else %}
+    <h4>{{ Post_list.firstlink }}</h4>
+    <h4>{{ Post_list.secondlink }}</h4>
+    <h4>{{ Post_list.thirdlink }}</h4>
+  {% endif %}</div>
+  <br>
+  <div class="group">
+  <p>Votes: {{ Post_list.count }}</p>
+  {% if request.session.voted == "True" and request.session.user_username %}
+    <p>You liked this post Already</p>
+  {% elif request.session.voted == "False" and request.session.user_username %}
+      </div>
+  <button onclick="window.location.href='/r/{{ Post_list.subreddit }}/{{ Post_list.id }}/votepost/'" type="button" class="button3 buttonBlue">Vote
+    <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+  </button>
+{% endif %}
+  <form class="group" action="/r/{{ Post_list.subreddit }}/{{ Post_list.id }}/authcomment/" method="POST">{% csrf_token %}
+   <div class="group">
+    <h2>Comment</h2>
+    <input type="hidden" name="id" value="{{ Post_list.id }}">
+    <textarea rows="10" cols="50" name="comment" required></textarea>
+  <button type="submit" onclick="review.save(); return false;" class="button buttonBlue">Submit
+    <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+  </button>
+   </div>
+  </form>
+{% for post in comment_list %}
+<div class="group3">
+    <p class="p2"><u>{{ post.creator }} comment(Id:{{ post.id }}): Votes: {{ post.count }}</u></p>
+    <p class="p3">{{ post.comment }}</p><br>
+    {% if request.session.user_username %}
+  <button onclick="window.location.href='/r/{{ Post_list.subreddit }}/{{ Post_list.id }}/{{ post.id }}/commentvote/'" type="button" class="button2 buttonBlue">Vote
+    <div class="ripples buttonRipples"><span class="ripplesCircle"><p class="p3">ID:{{ post.id }}</p></span></div>
+  </button>
+   {% else %}
+    {% endif %}
+</div>
+{% endfor %}
+</body>
+</html>
+
+
+
+
+
+

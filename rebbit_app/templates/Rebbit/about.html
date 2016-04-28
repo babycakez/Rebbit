@@ -2,13 +2,13 @@
 
 <html lang="en">
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
     {% load staticfiles %}
     <meta charset="UTF-8" />
     <link rel="stylesheet" type="text/css" href="{% static 'Rebbit/signintwo.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'Rebbit/homepage.css' %}">
     <title>subrebbit</title>
 </head>
-{% block content %}
 <body class = "news">
   <header>
     <div class="nav">
@@ -29,33 +29,20 @@
       </ul>
     </div>
   </header>
-<form action="/authsign/" method="POST">{% csrf_token %}
+  <div class="postview">
   <div class="group">
-    <input type="text" name="firstname" required><span class="highlight"></span><span class="bar"></span>
-    <label>First Name</label>
-  </div>
-  <div class="group">
-    <input type="text" name="lastname" required><span class="highlight"></span><span class="bar"></span>
-    <label>Last Name</label>
-  </div>
-      <div class="group">
-    <input type="text" name="email" required><span class="highlight"></span><span class="bar"></span>
-    <label>Email</label>
-  </div>
-      </div>
-      <div class="group">
-    <input type="text" name="username" required><span class="highlight"></span><span class="bar"></span>
-    <label>Username</label>
-  </div>
-      </div>
-      <div class="group">
-    <input type="text" name="password" required><span class="highlight"></span><span class="bar"></span>
-    <label>Password</label>
-  </div>
-      <button type="submit" onclick="review.save(); return false;" class="button buttonBlue">Submit
-    <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
-  </button>
-</form>
-{% endblock %}
+        <center><h1><u>The Rebbit Team</u></h1><span class="highlight"></span><span class="bar"></span>
+  </center></div>
+      <h3>We are hardworking TSL interns that strive to impress our boss David Hartmann. At times this
+      proves to be difficult but we keep our heads up high and just keep trying. This site in particular was
+      developed by Matthew Galvis and myself(Marvin Andara). Hopefully you can enjoy the site and add
+      some productive content onto it. See you around!</h3>
+ </div>
 </body>
 </html>
+
+
+
+
+
+
